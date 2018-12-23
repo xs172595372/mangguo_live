@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import io.vov.vitamio.LibsChecker;
@@ -25,32 +26,20 @@ public class MainActivity extends Activity implements OnBufferingUpdateListener,
     private SurfaceView mPreview;
     private SurfaceHolder holder;
     private String path;
-    private Bundle extras;
-    private static final String MEDIA = "media";
-    private static final int LOCAL_AUDIO = 1;
-    private static final int STREAM_AUDIO = 2;
-    private static final int RESOURCES_AUDIO = 3;
-    private static final int LOCAL_VIDEO = 4;
-    private static final int STREAM_VIDEO = 5;
     private boolean mIsVideoSizeKnown = false;
     private boolean mIsVideoReadyToBePlayed = false;
 
-    /**
-     *
-     * Called when the activity is first created.
-     */
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
         if (!LibsChecker.checkVitamioLibs(this))
             return;
         setContentView(R.layout.activity_main);
-        mPreview = (SurfaceView) findViewById(R.id.surface);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        mPreview = findViewById(R.id.surface);
         holder = mPreview.getHolder();
         holder.addCallback(this);
         holder.setFormat(PixelFormat.RGBA_8888);
-        extras = getIntent().getExtras();
-
     }
 
     private void playVideo() {
