@@ -57,7 +57,7 @@ public class MainActivity extends Activity implements OnBufferingUpdateListener,
             setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         } catch (Exception e) {
-            Log.e(TAG, "error: " + e.getMessage(), e);
+            Log.e(TAG, "error: " + e.getMessage());
         }
     }
 
@@ -101,7 +101,7 @@ public class MainActivity extends Activity implements OnBufferingUpdateListener,
     }
 
     public void surfaceCreated(SurfaceHolder holder) {
-        Log.d(TAG, "surfaceCreated called");
+        Log.d(TAG, "");
         playVideo();
     }
 
